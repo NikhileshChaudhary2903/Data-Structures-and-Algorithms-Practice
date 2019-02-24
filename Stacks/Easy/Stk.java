@@ -45,7 +45,7 @@ class Stk <T> {
 		
 		if(this.top == -1)	
 		{
-			System.out.println("Stack Overflow");
+			System.out.println("Stack Underflow");
 			return null;
 		}
 		
