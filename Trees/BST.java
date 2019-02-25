@@ -58,6 +58,41 @@ class Node {
 		return root;
 
 	}
+		
+	
+	public Node delete(Node root,int key)
+	{
+		if(root==null)
+			return null;
+		
+		else if(root.val > key)
+			root.left=delete(root.left,key);
+		else if(root.val < key)
+			root.right=delete(root.right,key);	
+		else {
+			
+			// 2 child
+		if(root.left!=null && root.right!=null)	
+		{
+		 Node preSuccessor = maxNode(root.left);
+		 root.val = preSuccessor.val;
+		 root.left=delete(root.left,root.val);
+		}
+		else
+		{
+			Node temp = root;
+			if(root.left == null)
+				root=root.right;
+			
+			else if(root.right == null)
+				root=root.left;
+	
+			temp =null;				
+		}		
+		}
+		
+		return root;
+	}	
 
 	public Node search(Node root,int key)
 	{
