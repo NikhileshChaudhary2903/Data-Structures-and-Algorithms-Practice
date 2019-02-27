@@ -43,10 +43,30 @@ public class Graph {
 //	 return this.adjList[i];		
 //	}
 	
-	void bfs() {
+	void bfs(int i) {
 		
+		// visited set
+	Set<Integer> set =new HashSet<>();
+	Queue<Integer> q = new LinkedList<>();	
 	
+	q.add(i);
+	
+	while(!q.isEmpty())
+	{
+	int f= q.poll();	
+	System.out.println(f);
+	set.add(f);
+	
+	for(int u:this.adjList[f])
+	{
+		if(!set.contains(u))
+		{	
+		q.add(u);
+		set.add(u);
+		}
+	}
 		
+	}
 		
 	}
 	
