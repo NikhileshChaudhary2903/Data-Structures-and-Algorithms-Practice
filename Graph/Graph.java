@@ -43,7 +43,7 @@ public class Graph {
 //	 return this.adjList[i];		
 //	}
 	
-	void bfs(int i) {
+void bfs(int i) {
 		
 		// visited set
 	Set<Integer> set =new HashSet<>();
@@ -54,15 +54,18 @@ public class Graph {
 	while(!q.isEmpty())
 	{
 	int f= q.poll();	
-	System.out.println(f);
-	set.add(f);
+	
+	if(!set.contains(f))
+	{
+		set.add(f);
+		System.out.println(f);
+	}
 	
 	for(int u:this.adjList[f])
 	{
 		if(!set.contains(u))
 		{	
 		q.add(u);
-		set.add(u);
 		}
 	}
 		
