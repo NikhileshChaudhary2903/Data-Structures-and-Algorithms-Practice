@@ -1,4 +1,77 @@
-	static String s1 = "NAME,LEG_LENGTH,DIET\n" + 
+import java.util.Comparator;
+
+public class Dinosaur {
+
+	
+	String name,diet,stance;
+	double speed,legLength,strideLength;
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getDiet() {
+		return diet;
+	}
+	public void setDiet(String diet) {
+		this.diet = diet;
+	}
+	public String getStance() {
+		return stance;
+	}
+	public void setStance(String stance) {
+		this.stance = stance;
+	}
+	public double getSpeed() {
+		return speed;
+	}
+	public void setSpeed(double speed) {
+		this.speed = speed;
+	}
+	public double getLegLength() {
+		return legLength;
+	}
+	public void setLegLength(double legLength) {
+		this.legLength = legLength;
+	}
+	public double getStrideLength() {
+		return strideLength;
+	}
+	public void setStrideLength(double strideLength) {
+		this.strideLength = strideLength;
+	}
+	public Dinosaur(String name, String diet, String stance, double speed, double legLength, double strideLength) {
+		super();
+		this.name = name;
+		this.diet = diet;
+		this.stance = stance;
+		this.speed = speed;
+		this.legLength = legLength;
+		this.strideLength = strideLength;
+	}
+	
+	public double calculateSpeed(double leg_length, double stride_length) {
+	    return (stride_length / leg_length - 1) * Math.sqrt(leg_length * 9.8);
+	  }
+}
+
+class SpeedComparator implements Comparator<Dinosaur> {
+
+	@Override
+	public int compare(Dinosaur o1, Dinosaur o2) {
+		// TODO Auto-generated method stub
+		
+		if(o1.speed > o2.speed)
+			return -1;
+		else if(o1.speed < o2.speed)
+			return 1;
+		
+		return 0;
+	}
+}	
+
+static String s1 = "NAME,LEG_LENGTH,DIET\n" + 
 			"Hadrosaurus,1.2,herbivore\n" + 
 			"Struthiomimus,0.92,omnivore\n" + 
 			"Velociraptor,1.0,carnivore\n" + 
