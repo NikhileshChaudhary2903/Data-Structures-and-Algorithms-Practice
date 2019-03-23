@@ -20,6 +20,44 @@ public class Graph {
 			this.adjList[i] =new LinkedList<>();
 
 	}
+	
+		// i to j
+	public void addDirected(int i,int j) {
+		this.adjList[i].add(j);
+	}
+
+	public void dfsRecursive(Map<Integer, Integer> map) {
+
+		int[] flag= new int[this.V];
+
+		// 0 means white and all vertices will be white
+		// 1 means visted but all children not yet explored
+		// 2 means done and dusted ie visited plus all children explored
+
+		for(int i=0;i<this.V;i++)
+		{
+			// if it is not visited yet
+			if(flag[i]==0)	
+				dfsUtil(flag,i,map);
+		}
+	}
+
+	public void dfsUtil(int []flag,int i,Map<Integer, Integer> map) {
+
+		// visite the node
+		flag[i] = 1;
+		System.out.println(i);
+
+		for(int u:this.adjList[i])
+		{
+			if(flag[u]==0) {
+				dfsUtil(flag, u,map);
+				map.put(u,i); // u got its label in dfs from i ie traversing adjacency list 
+			}
+		}
+
+		flag[i] = 2; // done and dusted node
+	}
 
 	public void addUndirectedEdge(int i,int j) {
 		this.adjList[i].add(j);
