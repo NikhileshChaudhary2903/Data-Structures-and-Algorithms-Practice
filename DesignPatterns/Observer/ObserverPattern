@@ -1,0 +1,142 @@
+package com.examples.designpatterns;
+
+import java.util.ArrayList;
+import java.util.List;
+
+class Stock {
+
+	double stockPrice;
+	String stockName;
+	public double getStockPrice() {
+		return stockPrice;
+	}
+	public void setStockPrice(double stockPrice) {
+		this.stockPrice = stockPrice;
+	}
+	public String getStockName() {
+		return stockName;
+	}
+	public void setStockName(String stockName) {
+		this.stockName = stockName;
+	}
+	public Stock(double stockPrice, String stockName) {
+		super();
+		this.stockPrice = stockPrice;
+		this.stockName = stockName;
+	}
+	@Override
+	public String toString() {
+		return "Stock [stockPrice=" + stockPrice + ", stockName=" + stockName + "]";
+	}
+
+
+
+}
+
+public class ObserverPattern {
+
+	public static void main(String args[]) {
+
+		// initialize stock publisher
+		StockPublisher spub1 = new StockPublisher();
+		Stock sApple = new Stock(7000.00, "Apple");
+		Stock sNvidia = new Stock(3000.00, "Nvidia");
+		Stock sIntel = new Stock(4000.00, "Intel");
+
+		// init stock observers
+		StockObserver sob1 = new StockObserver("Nikhil");
+		StockObserver sob2 = new StockObserver("Arpit");
+		StockObserver sob3 = new StockObserver("Akash");
+
+		spub1.register(sob1);
+		spub1.register(sob2);
+
+		spub1.addStocksInfo(sApple);
+		spub1.addStocksInfo(sIntel);
+		spub1.addStocksInfo(sNvidia);
+
+		System.out.println(spub1.observers.toString());
+
+	}
+
+}
+
+// publisher of stocks Information
+interface Subject {
+
+	void register(Observer o);
+	void unregister(Observer o);
+	void notifyAllObservers();
+
+}
+
+// subscriber who wants to be updated
+interface Observer {
+
+	void update(Subject s);
+}
+
+class StockPublisher implements Subject {
+
+	List<Observer> observers;
+	List<Stock> stocks;
+
+	public StockPublisher() {
+		this.observers = new ArrayList<>();
+		this.stocks = new ArrayList<>();
+	}
+
+	@Override
+	public void register(Observer o) {
+		// TODO Auto-generated method stub
+		this.observers.add(o);
+	}
+
+	@Override
+	public void unregister(Observer o) {
+		// TODO Auto-generated method stub
+		int index = this.observers.indexOf(o);
+		this.observers.remove(index);
+	}
+
+	@Override
+	public void notifyAllObservers() {
+		// TODO Auto-generated method stub
+		for(Observer o:observers)
+		{
+			o.update(this);	
+		}
+	}
+
+	public void addStocksInfo(Stock s) {
+		this.stocks.add(s);
+		this.notifyAllObservers();
+	}
+
+	public String toString() {
+
+		return this.stocks.toString();	
+
+	}
+
+}
+
+class StockObserver implements Observer{
+
+	String name;
+	public StockObserver(String name) {
+		super();
+		this.name = name;
+	}
+	@Override
+	public void update(Subject s) {
+		// TODO Auto-generated method stub
+		System.out.println(this.name + " got notified of job");
+		System.out.println("updated stocks price list" + s.toString());
+	}
+	@Override
+	public String toString() {
+		return "StockObserver [name=" + name + "]";
+	}
+}
+
