@@ -38,7 +38,8 @@ public class ObserverPattern {
 	public static void main(String args[]) {
 
 		// initialize stock publisher
-		StockPublisher spub1 = new StockPublisher();
+		StockPublisher spub1 = new StockPublisher("BloomBerg");
+		
 		Stock sApple = new Stock(7000.00, "Apple");
 		Stock sNvidia = new Stock(3000.00, "Nvidia");
 		Stock sIntel = new Stock(4000.00, "Intel");
@@ -50,12 +51,14 @@ public class ObserverPattern {
 
 		spub1.register(sob1);
 		spub1.register(sob2);
-
+		
 		spub1.addStocksInfo(sApple);
 		spub1.addStocksInfo(sIntel);
+		spub1.register(sob3);
+		
 		spub1.addStocksInfo(sNvidia);
 
-		System.out.println(spub1.observers.toString());
+//		System.out.println(spub1.observers.toString());
 
 	}
 
@@ -77,13 +80,19 @@ interface Observer {
 }
 
 class StockPublisher implements Subject {
-
+	
+	private String name;
 	List<Observer> observers;
 	List<Stock> stocks;
 
-	public StockPublisher() {
+	public StockPublisher(String name) {
 		this.observers = new ArrayList<>();
 		this.stocks = new ArrayList<>();
+		this.name= name;
+	}
+	
+	public String getName() {
+		return name;
 	}
 
 	@Override
@@ -131,7 +140,7 @@ class StockObserver implements Observer{
 	@Override
 	public void update(Subject s) {
 		// TODO Auto-generated method stub
-		System.out.println(this.name + " got notified of job");
+		System.out.println(this.name + " got notified of job by " + ((StockPublisher)s).getName());
 		System.out.println("updated stocks price list" + s.toString());
 	}
 	@Override
