@@ -173,6 +173,44 @@ public class Graph {
 				dfsrec(u,set);
 		}
 	}
+	
+		void bfswithColors(Map<Integer, Integer> map) {
+
+		int[] flag= new int[this.V];
+
+		for(int i=0;i<this.V;i++)
+		{
+			if(flag[i]==Color.WHITE.getValue())	
+				bfswithColors(flag,i,map);	
+		}
+
+	}
+
+	void bfswithColors(int[] flag, int i,Map<Integer, Integer> map) {
+		// TODO Auto-generated method stub
+
+		Queue<Integer> queue = new LinkedList<>();
+		queue.offer(i);
+		flag[i] = Color.GREY.getValue();
+
+		while(!queue.isEmpty()) {
+			Integer front = queue.poll();	
+			System.out.println(front);
+			for(int u:adjList[i])
+			{
+				if(flag[u] == Color.WHITE.getValue())	
+				{
+					queue.offer(u);
+					flag[u] = Color.GREY.getValue();
+					map.put(u, front);
+				}
+			}
+
+			flag[front]= Color.BLACK.getValue(); 
+
+		}
+
+	}
 
 	public static void main(String []args) {
 
