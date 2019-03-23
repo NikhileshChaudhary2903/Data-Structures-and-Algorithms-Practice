@@ -1,13 +1,28 @@
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 import java.util.Stack;
 
 import javax.print.attribute.HashAttributeSet;
 
-public class Graph {
+enum Color 
+{ 
+    WHITE(0), GREY(1), BLACK(2);
 
+	private final int value;
+    private Color(int value) {
+        this.value = value;
+    }
+
+    public int getValue() {
+        return value;
+    }
+}
+public class Graph {
+	
 	int V;
 	LinkedList<Integer> adjList[];
 
@@ -16,12 +31,18 @@ public class Graph {
 		this.adjList = new LinkedList[v+1];
 
 		// init adjacency list for each node
-		for(int i=1;i<=v;i++)
+		for(int i=0;i<v;i++)
 			this.adjList[i] =new LinkedList<>();
 
 	}
-	
-		// i to j
+
+	public void addUndirectedEdge(int i,int j) {
+		this.adjList[i].add(j);
+		this.adjList[j].add(i);
+
+	}
+
+	// i to j
 	public void addDirected(int i,int j) {
 		this.adjList[i].add(j);
 	}
@@ -33,11 +54,10 @@ public class Graph {
 		// 0 means white and all vertices will be white
 		// 1 means visted but all children not yet explored
 		// 2 means done and dusted ie visited plus all children explored
-
 		for(int i=0;i<this.V;i++)
 		{
 			// if it is not visited yet
-			if(flag[i]==0)	
+			if(flag[i]==Color.WHITE.getValue())	
 				dfsUtil(flag,i,map);
 		}
 	}
@@ -45,25 +65,20 @@ public class Graph {
 	public void dfsUtil(int []flag,int i,Map<Integer, Integer> map) {
 
 		// visite the node
-		flag[i] = 1;
+		flag[i] = Color.GREY.getValue();
 		System.out.println(i);
-
+		
 		for(int u:this.adjList[i])
 		{
-			if(flag[u]==0) {
+			if(flag[u]==Color.WHITE.getValue()) {
 				dfsUtil(flag, u,map);
 				map.put(u,i); // u got its label in dfs from i ie traversing adjacency list 
 			}
 		}
 
-		flag[i] = 2; // done and dusted node
+		flag[i] = Color.BLACK.getValue() ; // done and dusted node
 	}
 
-	public void addUndirectedEdge(int i,int j) {
-		this.adjList[i].add(j);
-		this.adjList[j].add(i);
-
-	}
 
 	void printGraph() {
 
@@ -147,7 +162,37 @@ public class Graph {
 
 	}
 
+	void dfsrec(int v,Set<Integer> set) {
 
+		set.add(v);
+		System.out.println(v);
+
+		for(int u:this.adjList[v])
+		{
+			if(!set.contains(u))
+				dfsrec(u,set);
+		}
+	}
+
+	public static void main(String []args) {
+
+		Graph g =new Graph(5);
+
+		g.addDirected(0, 1);
+		g.addDirected(0, 3);
+		g.addDirected(1, 2);
+		g.addDirected(3, 2);
+		g.addDirected(2, 4);
+
+		HashMap<Integer,Integer> hmap = new HashMap<>();
+
+
+		g.dfsRecursive(hmap);
+		
+		System.out.println(hmap);
+
+
+	}
 
 }
 
