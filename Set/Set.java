@@ -7,6 +7,11 @@ public class Set {
     private Object[] items;
     private int capacity, size;
 
+    public int getCapacity() {
+        return this.capacity;
+    }
+
+
     public Set(int c) {
         this.capacity = c;
         this.items = new Object[this.capacity];
@@ -42,6 +47,7 @@ public class Set {
 
             if (this.size == this.capacity) {
                 items = Arrays.copyOf(items, 2 * this.capacity);
+                this.capacity = 2 * this.capacity;
             }
             items[size++] = item;
             return true;
