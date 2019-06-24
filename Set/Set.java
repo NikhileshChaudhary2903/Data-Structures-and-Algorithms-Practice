@@ -65,6 +65,7 @@ public class Set {
 
             if (item.equals(this.items[i])) {
                 items[i] = items[size - 1];
+                items[size - 1] = null;
                 size--;
                 return true;
             }
@@ -82,4 +83,7 @@ public class Set {
         this.size = 0;
     }
 
+    public String toString() {
+        return Arrays.toString(this.items);
+    }
 }
