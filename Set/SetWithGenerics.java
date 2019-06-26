@@ -77,7 +77,7 @@ public class Set<T> {
         if(this.isEmpty())
             return false;
 
-        for(int i = 0 ; i <this.items.length ;i++) {
+        for(int i = 0 ; i <this.count ;i++) {
 
             if(item.equals(this.items[i]))
             {
