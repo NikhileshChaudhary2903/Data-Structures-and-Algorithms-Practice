@@ -8,7 +8,7 @@ public class MyCircularQueue {
 
         items = new int[k];
         front = 0;
-        rear = -1; // next empty slot to be added
+        rear = 0;
         size = 0;
     }
 
@@ -18,8 +18,8 @@ public class MyCircularQueue {
         if(isFull()) {
             return false;
         }
-        rear = (rear + 1)% items.length;
         items[rear] = value;
+        rear = (rear + 1)% items.length;
         size++;
         return true;
     }
@@ -42,9 +42,7 @@ public class MyCircularQueue {
 
     /** Get the last item from the queue. */
     public int Rear() {
-
-        return (isEmpty())? -1: items[rear];
-
+        return (isEmpty())? -1: (rear == 0) ? items[items.length - 1] : items[rear - 1] ;
     }
 
     /** Checks whether the circular queue is empty or not. */
