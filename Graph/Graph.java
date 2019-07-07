@@ -46,7 +46,46 @@ public class Graph {
 	public void addDirected(int i,int j) {
 		this.adjList[i].add(j);
 	}
+	
+	 public boolean checkCycle() {
 
+        int visited[] = new int[this.V];
+        Arrays.fill(visited,Color.WHITE.getValue());
+        Map<Integer,Integer> parentMap = new HashMap<>();
+
+        for(int i = 0;i < this.V;i++) {
+
+            if(visited[i]==Color.WHITE.getValue())
+            {
+                if(isCycle(visited,i,parentMap))
+                    return true;
+//                System.out.println(parentMap);
+            }
+        }
+
+    return false;
+    }
+
+     boolean isCycle(int[] visited, int i, Map<Integer, Integer> parentMap) {
+
+        visited[i] = Color.GREY.getValue();
+
+        for(int v:adjList[i]) {
+            if(visited[v] == Color.WHITE.getValue()) {
+                parentMap.put(v,i);
+                 if(isCycle(visited,v, parentMap))
+                     return true;
+            }
+            else if(parentMap.containsKey(i) && parentMap.get(i)!=v){
+                return true;
+            }
+
+            }
+
+         visited[i] = Color.BLACK.getValue(); // done and dusted
+         return false;
+
+     }
 	public void dfsRecursive(Map<Integer, Integer> map) {
 
 		int[] flag= new int[this.V];
