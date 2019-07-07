@@ -61,6 +61,48 @@ public class Graph {
 				dfsUtil(flag,i,map);
 		}
 	}
+	
+	public void topologicalSort() {
+
+        int deg[] = new int[this.V];
+
+        for(int i = 0;i < this.V;i++)
+        {
+           for(int u:adjList[i]) {
+            deg[u]++;
+           }
+        }
+
+        Queue<Integer> queue = new LinkedList<>();
+        int count = 0;
+
+        for(int i = 0;i < this.V;i++) {
+            if(deg[i] == 0) {
+               count++;
+               queue.add(i);
+            }
+        }
+        List<Integer> list = new ArrayList<>();
+
+        while (!queue.isEmpty()) {
+            int front = queue.remove();
+            list.add(front);
+
+            for(int u:adjList[front]) {
+                deg[u]--;
+
+                if(deg[u] == 0)
+                    queue.offer(u);
+            }
+            count++;
+        }
+
+        if(count != this.V) {
+            System.out.println("cycle exists");
+        }
+
+        System.out.println(list);
+    }
 
 	public void dfsUtil(int []flag,int i,Map<Integer, Integer> map) {
 
