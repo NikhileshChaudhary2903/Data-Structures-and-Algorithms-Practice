@@ -22,11 +22,11 @@
 		  for(int j = 0; j < nums.length ;j++) {
 			  
 			  if(visited[j] == false) { // contrsaints
-				  inner.add(nums[j]);
-				  visited[j] = true;
-				  backtrackPermute(nums, ans, inner, i + 1, visited);
-				  visited[j] = false;
-				  inner.remove(inner.size() - 1);
+				  inner.add(nums[j]); // choose
+				  visited[j] = true; // choose
+				  backtrackPermute(nums, ans, inner, i + 1, visited); // explore
+				  visited[j] = false; // unchoose
+				  inner.remove(inner.size() - 1); // unchoose
 			  }
 		  }
 	}
