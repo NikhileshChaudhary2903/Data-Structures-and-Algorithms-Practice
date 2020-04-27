@@ -99,7 +99,7 @@ public class StrategyPatternDemo {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		// we want to create multiple ducks with different types of behaviour
-		// we create a generic interface to create a quack strategy/behavior
+		// we create generic interfaces to create quack/fly strategy/behavior
 		// let concrete implementations define those strategies implementations
 		// inject them into our concrete duck class via constructor or setter injection
 		
