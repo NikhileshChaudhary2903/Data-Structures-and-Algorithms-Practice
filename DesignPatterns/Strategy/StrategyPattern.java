@@ -103,6 +103,7 @@ public class StrategyPatternDemo {
 		// let concrete implementations define those strategies implementations
 		// inject them into our concrete duck class via constructor or setter injection
 		
+		// also you dont need the duck as an interface you can have a class Duck
 		Duck cityDuck = new CityDuck(new FlyWithWings(), new SimpleQuackBehaviour());
 		cityDuck.fly();
 		cityDuck.quack();
