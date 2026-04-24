@@ -76,5 +76,15 @@ public class WrapperClassUtility {
         sb.setCharAt(1, 'a');
         sb.setLength(0);
 
+        //important static methods of Math class
+
+        Math.floor(3.14);
+        Math.ceil(3.13);
+        Math.sqrt(3);
+        Math.pow(10, 5);
+        Math.max(10, 5);
+        Math.min(10, 5);
+        Math.abs(-10);
+
     }
 }
