@@ -16,6 +16,9 @@ public class ArraysPrimitiveUtility {
         Arrays.copyOf(a, 5);
         Arrays.sort(a, 2, 4);
 
+        // Arrays.deepToString(matrix)
+        // Arrays.copyOfRange(a, from, to)
+
         int[] nums = { 5, 2, 8, 1, 9, 2 };
 
         // Method A: Standard
