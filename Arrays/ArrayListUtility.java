@@ -21,6 +21,7 @@ public class ArrayListUtility {
         list.sort(Collections.reverseOrder());
 
         String[] arr = list.toArray(new String[0]);
+        list.toArray(String[]::new);
         // new String[0] is the modern, preferred way for type safety.
         List<String> list1 = new ArrayList<>(Arrays.asList(arr));
         // Wrapping in new ArrayList<>() makes the list mutable (you can add/remove).
